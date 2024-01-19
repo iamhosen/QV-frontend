@@ -50,6 +50,16 @@ const handleSubmit = async () => {
         return;
       }
 
+      if(err.code === 'ERR_NETWORK') {
+        query.response = {
+          message: 'Network error: Check if the api server is running',
+          status: 500,
+          isValid: false,
+        };
+        isLoading.value = false;
+        return;
+      }
+
       query.response = err.response.data;
       query.response.isValid = false;
       isLoading.value = false;
