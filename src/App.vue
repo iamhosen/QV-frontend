@@ -60,6 +60,16 @@ const handleSubmit = async () => {
         return;
       }
 
+      if(!err.response.data) {
+        query.response = {
+          message: 'Unknown error',
+          status: 500,
+          isValid: false,
+        };
+        isLoading.value = false;
+        return;
+      }
+
       query.response = err.response.data;
       query.response.isValid = false;
       isLoading.value = false;
